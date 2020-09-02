@@ -5,4 +5,4 @@ beforeAll(() => {
   const server = new SetupSever();
   server.init();
   global.testRequest = supertest(server.getApp());
-})
+});
