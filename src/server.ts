@@ -6,7 +6,7 @@ import { BeachesController } from './controllers/beaches';
 import { Application } from 'express';
 import * as database from '@src/database';
 
-export class SetupSever extends Server {
+export class SetupServer extends Server {
   // Criando o construtor
   constructor(private port = 3000) {
     super();
@@ -38,5 +38,11 @@ export class SetupSever extends Server {
 
   public async close(): Promise<void> {
     await database.close();
+  }
+
+  public start(): void {
+    this.app.listen(this.port, () => {
+      console.info('Server listening on port: ' + this.port);
+    });
   }
 }

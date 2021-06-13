@@ -14,7 +14,6 @@ export interface Beach {
     position: BeachPosition;
     lat: number;
     lng: number;
-    user: string;
 }
 
 export interface BeachForecast extends Omit<Beach, 'user'>, ForecastPoint { }
@@ -46,6 +45,7 @@ export class Forecast {
             return this.mapForecastByTime(pointsWithCorrectSources);
         }
         catch (error) {
+            console.log(error)
             throw new ForecastProcessingInternalError(error.message);
         }
     }
