@@ -7,6 +7,8 @@ import { UsersController } from './controllers/users';
 import { Application } from 'express';
 import * as database from '@src/database';
 import logger from './logger';
+import expressPino from 'express-pino-logger';
+import cors from 'cors';
 
 export class SetupServer extends Server {
   // Criando o construtor
@@ -22,6 +24,16 @@ export class SetupServer extends Server {
 
   private setupExpress(): void {
     this.app.use(bodyParser.json());
+    this.app.use(
+      expressPino({
+        logger,
+      })
+    );
+    this.app.use(
+      cors({
+        origin: '*',
+      })
+    );
   }
 
   private setupControllers(): void {
